@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  -webkit-tap-highlight-color: transparent;
+  font-family: "Inter", sans-serif;
+  --rdp-accent-color: #e2cd93;
+  --rdp-background-color: #93d9e2;
+}
+
+body {
+  @apply flex flex-col min-h-screen;
+}
+
+.rdp-day_selected {
+  @apply font-bold text-black bg-slate-100 transition-all;
+}
+
+.rdp-day_today {
+  @apply text-blue-600 hover:bg-yellow-100;
+}
+
+.rdp-button_reset {
+  @apply text-zinc-700 hover:bg-yellow-800;
+}
