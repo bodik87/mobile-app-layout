@@ -28,29 +28,23 @@ export default function DateSlider() {
   const swiperRef = useRef();
 
   return (
-    <section className="bg-red-100 h-full">
-      <div className="bg-green-100 h-[60px] flex items-center relative">
-        <button className="p-5" onClick={() => setActive(!active)}>
-          <CalendarIcon />
-        </button>
-
-        {active && (
-          <>
-            <DayPicker
-              mode="single"
-              selected={selectedDay}
-              onSelect={setSelectedDay}
-              showOutsideDays
-              locale={uk}
-              className="absolute left-0 top-[35px] z-20 bg-slate-200 p-5 rounded-xl shadow-xl capitalize"
-            />
-            <div
-              onClick={() => setActive(false)}
-              className="fixed inset-0 bg-black/50 z-10"
-            ></div>
-          </>
-        )}
-      </div>
+    <section className="bg-red-100 h-full flex flex-col">
+      {active && (
+        <>
+          <DayPicker
+            mode="single"
+            selected={selectedDay}
+            onSelect={setSelectedDay}
+            showOutsideDays
+            locale={uk}
+            className="absolute left-0 right-0 w-fit mx-auto bottom-[80px] z-20 bg-slate-200 p-5 rounded-xl shadow-xl capitalize"
+          />
+          <div
+            onClick={() => setActive(false)}
+            className="fixed inset-0 bg-black/50 z-10"
+          />
+        </>
+      )}
 
       <Swiper
         initialSlide={initialSlide}
@@ -59,7 +53,7 @@ export default function DateSlider() {
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        className="bg-slate-300 h-[calc(100vh_-_120px)]"
+        className="bg-slate-300 w-full grow"
         onSlideChange={(swiper) => {
           if (swiper.previousIndex < swiper.activeIndex) {
             setCounter(counter + 1);
@@ -86,6 +80,9 @@ export default function DateSlider() {
         <button className="p-4 active:scale-95 transition-all">
           <LoginIcon />
         </button>
+        <button className="p-4" onClick={() => setActive(!active)}>
+          <CalendarIcon />
+        </button>
         <button className="p-4 active:scale-95 transition-all">
           <SearchBottomIcon />
         </button>
@@ -101,7 +98,7 @@ export function CalendarIcon() {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none">
       <path
-        stroke="#000"
+        stroke="#fff"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth="2"

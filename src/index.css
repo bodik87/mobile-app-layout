@@ -10,8 +10,13 @@
 }
 
 html,
+body,
+#root {
+  @apply h-full;
+}
+
 body {
-  @apply flex flex-col h-full;
+  @apply flex flex-col;
 }
 
 .rdp-day_selected {
