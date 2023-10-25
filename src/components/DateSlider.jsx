@@ -28,7 +28,7 @@ export default function DateSlider() {
   const swiperRef = useRef();
 
   return (
-    <section className="bg-red-100 min-h-screen">
+    <section className="bg-red-100 h-full">
       <div className="bg-green-100 h-[60px] flex items-center relative">
         <button className="p-5" onClick={() => setActive(!active)}>
           <CalendarIcon />
