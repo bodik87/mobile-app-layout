@@ -1,35 +1,30 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { addDays, eachDayOfInterval, format, subDays } from "date-fns";
 import { uk } from "date-fns/locale";
 import { DayPicker } from "react-day-picker";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { HomeIcon, LoginIcon, SearchBottomIcon, SettingsIcon } from "./Icons";
 import "swiper/css";
 import "react-day-picker/dist/style.css";
-import { HomeIcon, LoginIcon, SearchBottomIcon, SettingsIcon } from "./Icons";
 
 export default function DateSlider() {
   const initialSlide = "99";
-  const [counter, setCounter] = useState(1);
-  const [selected, setSelected] = useState(new Date());
-
-  const [active, setActive] = useState(false);
+  const [counter, setCounter] = useState(0);
+  const [visibleCalendar, setVisibleCalendar] = useState(false);
   const [selectedDay, setSelectedDay] = useState();
 
   useEffect(() => {
-    setActive(false);
-    setSelected(selectedDay || new Date());
+    setVisibleCalendar(false);
   }, [selectedDay]);
 
   const days = eachDayOfInterval({
-    start: subDays(selected, 100),
-    end: addDays(selected, counter),
+    start: subDays(selectedDay || new Date(), 100),
+    end: addDays(selectedDay || new Date(), counter),
   });
-
-  const swiperRef = useRef();
 
   return (
     <section className="bg-red-100 h-full flex flex-col">
-      {active && (
+      {visibleCalendar && (
         <>
           <DayPicker
             mode="single"
@@ -40,7 +35,7 @@ export default function DateSlider() {
             className="absolute left-0 right-0 w-fit mx-auto bottom-[80px] z-20 bg-slate-200 p-5 rounded-xl shadow-xl capitalize"
           />
           <div
-            onClick={() => setActive(false)}
+            onClick={() => setVisibleCalendar(false)}
             className="fixed inset-0 bg-black/50 z-10"
           />
         </>
@@ -50,21 +45,26 @@ export default function DateSlider() {
         initialSlide={initialSlide}
         spaceBetween={0}
         slidesPerView={1}
-        onBeforeInit={(swiper) => {
-          swiperRef.current = swiper;
-        }}
         className="bg-slate-300 w-full grow"
         onSlideChange={(swiper) => {
           if (swiper.previousIndex < swiper.activeIndex) {
+            swiper.previousIndex !== 0 &&
+              setSelectedDay((selectedDay) =>
+                addDays(selectedDay || new Date(), 1)
+              );
             setCounter(counter + 1);
-          }
+          } else
+            swiper.previousIndex !== 0 &&
+              setSelectedDay((selectedDay) =>
+                addDays(selectedDay || new Date(), -1)
+              );
         }}
       >
         {days.slice(1).map((item) => (
           <SwiperSlide key={item}>
             <div key={item} className="p-3 flex justify-center items-center">
               <p className="font-medium capitalize select-none text-center">
-                {format(item, "EEEE dd.MM.Y", {
+                {format(selectedDay || new Date(), "EEEE dd.MM.Y", {
                   locale: uk,
                 })}
               </p>
@@ -80,7 +80,10 @@ export default function DateSlider() {
         <button className="p-4 active:scale-95 transition-all">
           <LoginIcon />
         </button>
-        <button className="p-4" onClick={() => setActive(!active)}>
+        <button
+          className="p-4"
+          onClick={() => setVisibleCalendar(!visibleCalendar)}
+        >
           <CalendarIcon />
         </button>
         <button className="p-4 active:scale-95 transition-all">
