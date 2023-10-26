@@ -95,7 +95,7 @@ export default function DateSlider() {
         ))}
       </Swiper>
 
-      <button className="w-12 h-12 pb-1 text-white text-4xl rounded-full bg-green-700 fixed bottom-20 right-5 shadow-lg z-10 active:scale-95 transition-all">
+      <button className="w-12 h-12 pb-1 text-green-700 text-4xl rounded-full bg-green-300 fixed bottom-20 right-5 z-10 active:scale-95 transition-all">
         +
       </button>
 
