@@ -6,7 +6,7 @@
   -webkit-tap-highlight-color: transparent;
   font-family: "Inter", sans-serif;
   --rdp-accent-color: #e2cd93;
-  --rdp-background-color: #93d9e2;
+  --rdp-background-color: #d0d2d7;
 }
 
 html,
@@ -20,7 +20,7 @@ body {
 }
 
 .rdp-day_selected {
-  @apply font-bold text-black bg-slate-100 transition-all;
+  @apply text-black bg-gray-100 transition-all;
 }
 
 .rdp-day_today {
@@ -28,5 +28,5 @@ body {
 }
 
 .rdp-button_reset {
-  @apply text-zinc-700 hover:bg-yellow-800;
+  @apply text-zinc-700 hover:bg-gray-300 hover:text-zinc-700;
 }
