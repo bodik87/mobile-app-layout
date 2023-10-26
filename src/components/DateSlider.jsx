@@ -41,11 +41,11 @@ export default function DateSlider() {
             onSelect={setSelectedDay}
             showOutsideDays
             locale={uk}
-            className="absolute left-0 right-0 w-fit mx-auto bottom-[80px] z-20 bg-gray-200 p-5 rounded-xl shadow-xl capitalize select-none"
+            className="absolute left-0 right-0 w-fit mx-auto bottom-[80px] z-30 bg-gray-200 p-5 rounded-xl shadow-xl capitalize select-none"
           />
           <div
             onClick={() => setVisibleCalendar(false)}
-            className="fixed inset-0 bg-black/50 z-10"
+            className="fixed inset-0 bg-black/50 z-20"
           />
         </>
       )}
@@ -94,6 +94,10 @@ export default function DateSlider() {
           </SwiperSlide>
         ))}
       </Swiper>
+
+      <button className="w-12 h-12 pb-1 text-white text-4xl rounded-full bg-green-700 fixed bottom-20 right-5 shadow-lg z-10 active:scale-95 transition-all">
+        +
+      </button>
 
       <footer className="h-[60px] flex justify-around bg-gray-200">
         <button className="p-4 active:scale-95 transition-all">
